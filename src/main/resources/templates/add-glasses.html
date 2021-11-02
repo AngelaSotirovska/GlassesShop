@@ -1,0 +1,71 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+<div class="container" style="margin-top: 10px">
+    <div class="row">
+        <div class="col-md-5">
+            <form action="/glasses/add" method="POST">
+                <input id="id" type="hidden" name="id" th:value="(${glasses} != null ? ${glasses.getId()} : '')">
+                <div class="form-group">
+                    <label for="imgUrl">Glasses image url:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="imgUrl"
+                           name="imgUrl"
+                           th:value="(${glasses} != null ? ${glasses.imgUrl} : '')"
+                           required
+                           placeholder="Enter glasses image url">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text"
+                           class="form-control"
+                           id="price"
+                           name="price"
+                           th:value="(${glasses} != null ? ${glasses.price} : '')"
+                           placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="text"
+                           class="form-control"
+                           id="quantity"
+                           name="quantity"
+                           th:value="(${glasses} != null ? ${glasses.quantity} : '')"
+                           placeholder="Quantity">
+                </div>
+                <div class="form-group">
+                    <label>Brand</label>
+                    <select name="brand" class="form-control">
+                        <option th:if="${glasses} != null"
+                                th:selected="${glasses.getBrand() != null && glasses.getBrand().getId() == br.getId()}"
+                                th:each="br: ${brands}"
+                                th:value="${br.getId()}"
+                                th:text="${br.getName()}">
+                        </option>
+                        <option th:if="${glasses} == null"
+                                th:each="br : ${brands}"
+                                th:value="${br.getId()}"
+                                th:text="${br.getName()}">
+                        </option>
+                    </select>
+                    <label>Category</label>
+                    <select name="category" class="form-control">
+                        <option th:if="${glasses} != null"
+                                th:selected="${glasses.getCategory() != null && glasses.getCategory().name() == cat.name()}"
+                                th:each="cat: ${categories}"
+                                th:value="${cat.name()}"
+                                th:text="${cat.name()}">
+                        </option>
+                        <option th:if="${glasses} == null"
+                                th:each="cat : ${categories}"
+                                th:value="${cat.name()}"
+                                th:text="${cat.name()}">
+                        </option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="button" class="btn btn-primary" href="/glasses">Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+</th:block>

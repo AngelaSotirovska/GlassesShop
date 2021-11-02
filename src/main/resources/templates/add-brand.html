@@ -1,0 +1,30 @@
+<div class="container" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" style="margin-top: 10px">
+    <div class="row">
+        <div class="col-md-5">
+            <form action="/glasses/addBrand" method="POST">
+                <div class="form-group">
+                    <label for="name">Brand name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           name="name"
+                           th:value="(${brand} != null ? ${brand.name} : '')"
+                           required
+                           placeholder="Enter brand name">
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text"
+                           class="form-control"
+                           id="country"
+                           name="country"
+                           th:value="(${brand} != null ? ${brand.country} : '')"
+                           placeholder="Enter brand country">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="button" class="btn btn-primary" href="/glasses">Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+

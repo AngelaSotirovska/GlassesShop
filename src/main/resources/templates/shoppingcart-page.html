@@ -1,0 +1,20 @@
+<div class="container" style="margin-top: 30px;" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${glasses.size()>0}">
+        <div class="forCol text-center" th:each="gl:${glasses}" style="width: 32%; margin: 6px; float: left; display: inline-block">
+            <div class="product-grid4">
+                <div class="product-image4">
+                    <a th:href="@{'/glasses/showglasses/{id}' (id=${gl.getId()})}">
+                        <img class="pic-1" src="/imgs" th:src="@{${gl.getImgUrl()}}" style="width: 100px; height: 100px">
+                    </a>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#" th:text="${gl.getBrand().getName()}"></a></h3>
+                    <div class="price" th:text="${gl.price}">
+                    </div>
+                    <a class="btn btn-sm btn-danger delete" th:href="@{'/shopping-cart/remove/{id}' (id=${gl.getId()})}"><b
+                            class="fa fa-trash">Remove From Cart</b></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
