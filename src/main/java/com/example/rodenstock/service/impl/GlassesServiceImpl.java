@@ -1,18 +1,16 @@
 package com.example.rodenstock.service.impl;
 
 
+import com.example.rodenstock.model.*;
 import com.example.rodenstock.model.exception.BrandNotFoundException;
 import com.example.rodenstock.model.exception.CategoryNotFoundException;
 import com.example.rodenstock.model.exception.GlassesNotFoundException;
-import com.example.rodenstock.model.Brand;
-import com.example.rodenstock.model.Category;
-import com.example.rodenstock.model.Glasses;
+import com.example.rodenstock.model.exception.ShoppingCartNotFoundException;
 import com.example.rodenstock.repository.BrandRepository;
 import com.example.rodenstock.repository.GlassesRepository;
+import com.example.rodenstock.repository.ShoppingCartRepository;
 import com.example.rodenstock.service.GlassesService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import com.example.rodenstock.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +22,12 @@ public class GlassesServiceImpl implements GlassesService {
 
     private final GlassesRepository glassesRepository;
     private final BrandRepository brandRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
 
-    public GlassesServiceImpl(GlassesRepository glassesRepository, BrandRepository brandRepository) {
+    public GlassesServiceImpl(GlassesRepository glassesRepository, BrandRepository brandRepository, ShoppingCartRepository shoppingCartRepository) {
         this.glassesRepository = glassesRepository;
         this.brandRepository = brandRepository;
+        this.shoppingCartRepository = shoppingCartRepository;
     }
 
     @Override
@@ -68,6 +68,17 @@ public class GlassesServiceImpl implements GlassesService {
     @Override
     public void deleteById(Long id) {
         this.glassesRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteFromShoppingCart(Long id, User user) throws GlassesNotFoundException {
+        Glasses glasses=this.findById(id).orElseThrow(GlassesNotFoundException::new);
+        List<ShoppingCart> shoppingCarts=this.shoppingCartRepository.findAll();
+        for(int i=0;i<shoppingCarts.size();i++){
+            if(shoppingCarts.get(i).getGlassesList().contains(glasses)){
+                shoppingCarts.get(i).getGlassesList().remove(glasses);
+            }
+        }
     }
 
 

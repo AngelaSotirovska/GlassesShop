@@ -21,7 +21,12 @@ public class ShoppingCart {
     @ManyToOne
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "shopping_cart_glasses_list",
+            joinColumns = @JoinColumn(name = "shopping_cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "glasses_id")
+    )
     private List<Glasses> glassesList;
 
     public ShoppingCart() {

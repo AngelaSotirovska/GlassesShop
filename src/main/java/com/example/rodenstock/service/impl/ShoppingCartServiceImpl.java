@@ -31,6 +31,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    public List<ShoppingCart> listShoppingCarts() {
+        return this.shoppingCartRepository.findAll();
+    }
+
+    @Override
     public List<Glasses> listAllGlasses(Long id) {
         if(!this.shoppingCartRepository.findById(id).isPresent()) {
             throw new ShoppingCartNotFoundException();

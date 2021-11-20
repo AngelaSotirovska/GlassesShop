@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 30px; margin-bottom: 10px" xmlns:th="http://www.thymeleaf.org" xmlns:sec="">
+<div class="container" style="margin-top: 30px; margin-bottom: 20px" xmlns:th="http://www.thymeleaf.org" xmlns:sec="">
     <div class="row">
         <div class="col-md-12 text-center">
             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
@@ -12,11 +12,11 @@
         </div>
     </div>
     <div th:if="${glasses.size()>0}" >
-        <div class="forCol text-center" th:each="gl:${glasses}" style="min-height: 100%; width: 32%; margin-top: 6px; margin-bottom: 30px; margin-left: 6px; margin-right: 6px; float: left; display: inline-block">
+        <div class="forCol text-center" th:each="gl:${glasses}" style="min-height: 100%; width: 32%; margin-top: 10px; margin-bottom: 30px; margin-left: 6px; margin-right: 6px; float: left; display: inline-block">
             <div class="product-grid4">
                 <div class="product-image4">
                     <a th:href="@{'/glasses/showglasses/{id}' (id=${gl.getId()})}">
-                        <img class="pic-1" src="/imgs" th:src="@{${gl.getImgUrl()}}" style="width: 190px; height: 110px">
+                        <img class="pic-1" src="/imgs" th:src="@{${gl.getImgUrl()}}" style="width: 190px; height: 110px; border-radius: 10%">
                     </a>
                 </div>
                 <div class="product-content">
@@ -30,7 +30,7 @@
                     <a class="btn btn-sm btn-danger delete" th:href="@{'/glasses/delete/{id}' (id=${gl.getId()})}"><b
                             class="fa fa-trash">DELETE</b></a></th:block>
                     <form th:action="@{'/shopping-cart/addglasses-shoppingcart/{id}' (id=${gl.getId()})}" th:method="POST" sec:authorize="isAuthenticated()">
-                        <button type="submit" class="btn btn-primary shop-button">Add to Cart</button>
+                        <button type="submit" class="btn btn-dark shop-button" style="margin-top: 2px">Add to Cart</button>
                     </form>
                    </div>
             </div>

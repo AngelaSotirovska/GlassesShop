@@ -7,7 +7,10 @@ import com.example.rodenstock.model.exception.CategoryNotFoundException;
 import com.example.rodenstock.model.exception.GlassesNotFoundException;
 import com.example.rodenstock.service.BrandService;
 import com.example.rodenstock.service.GlassesService;
+import com.example.rodenstock.service.ShoppingCartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +42,9 @@ public class GlassesController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable(name = "id") Long id) {
+    public String deleteProduct(@PathVariable(name = "id") Long id, Authentication authentication) throws GlassesNotFoundException {
+        User user = (User) authentication.getPrincipal();
+        glassesService.deleteFromShoppingCart(id, user);
         glassesService.deleteById(id);
         return "redirect:/glasses";
     }

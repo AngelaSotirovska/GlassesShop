@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ShoppingCartService {
+    List<ShoppingCart> listShoppingCarts();
     List<Glasses> listAllGlasses(Long id);
     ShoppingCart addGlassesToCart(String username, Long glassesId) throws GlassesNotFoundException;
     ShoppingCart getShoppingCart(String username);

@@ -2,6 +2,7 @@ package com.example.rodenstock.service;
 
 import com.example.rodenstock.model.Brand;
 import com.example.rodenstock.model.Category;
+import com.example.rodenstock.model.User;
 import com.example.rodenstock.model.exception.BrandNotFoundException;
 import com.example.rodenstock.model.exception.CategoryNotFoundException;
 import com.example.rodenstock.model.exception.GlassesNotFoundException;
@@ -21,6 +22,8 @@ public interface GlassesService {
     Optional<Glasses> edit(Long id, String imgUrl, Integer price, Integer quantity, String category, Long brand) throws BrandNotFoundException, GlassesNotFoundException;
 
     void deleteById(Long id);
+
+    void deleteFromShoppingCart(Long id, User user) throws GlassesNotFoundException;
 
     Glasses get(Long id);
 
