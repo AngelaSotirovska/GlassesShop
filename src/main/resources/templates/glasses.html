@@ -21,8 +21,8 @@
                 </div>
                 <div class="product-content">
                     <h3 class="title"><a th:href="@{'/glasses/showglasses/{id}' (id=${gl.getId()})}" th:text="${gl.getBrand().getName()}" style="text-decoration: none; color: black"></a></h3>
-                    <div class="price" th:text="${gl.price}">$
-                    </div>
+                    <div style="margin-bottom: 3px"><span>$</span><span class="price" th:text="${gl.price}"></span></div>
+
                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="btn btn-sm btn-info edit" th:href="@{'/glasses/edit-form/{id}' (id=${gl.getId()})}"><b
                             class="fa fa-trash">EDIT</b></a></th:block>

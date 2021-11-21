@@ -9,7 +9,7 @@
                 </div>
                 <div class="product-content">
                     <h3 class="title"><a th:href="@{'/glasses/showglasses/{id}' (id=${gl.getId()})}" th:text="${gl.getBrand().getName()}" style="text-decoration: none; color: black"></a></h3>
-                    <div class="price" th:text="${gl.price}">
+                    <div style="margin-bottom: 3px"><span>$</span><span class="price" th:text="${gl.price}"></span></div>
                     </div>
                     <a class="btn btn-sm btn-danger delete" th:href="@{'/shopping-cart/remove/{id}' (id=${gl.getId()})}"><b
                             class="fa fa-trash">Remove From Cart</b></a>
