@@ -5,12 +5,10 @@ import com.example.rodenstock.model.*;
 import com.example.rodenstock.model.exception.BrandNotFoundException;
 import com.example.rodenstock.model.exception.CategoryNotFoundException;
 import com.example.rodenstock.model.exception.GlassesNotFoundException;
-import com.example.rodenstock.model.exception.ShoppingCartNotFoundException;
 import com.example.rodenstock.repository.BrandRepository;
 import com.example.rodenstock.repository.GlassesRepository;
-import com.example.rodenstock.repository.ShoppingCartRepository;
+import com.example.rodenstock.repository.CartItemRepository;
 import com.example.rodenstock.service.GlassesService;
-import com.example.rodenstock.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,12 +20,12 @@ public class GlassesServiceImpl implements GlassesService {
 
     private final GlassesRepository glassesRepository;
     private final BrandRepository brandRepository;
-    private final ShoppingCartRepository shoppingCartRepository;
+    private final CartItemRepository cartItemRepositoryRepository;
 
-    public GlassesServiceImpl(GlassesRepository glassesRepository, BrandRepository brandRepository, ShoppingCartRepository shoppingCartRepository) {
+    public GlassesServiceImpl(GlassesRepository glassesRepository, BrandRepository brandRepository, CartItemRepository cartItemRepositoryRepository) {
         this.glassesRepository = glassesRepository;
         this.brandRepository = brandRepository;
-        this.shoppingCartRepository = shoppingCartRepository;
+        this.cartItemRepositoryRepository = cartItemRepositoryRepository;
     }
 
     @Override
@@ -41,7 +39,6 @@ public class GlassesServiceImpl implements GlassesService {
     }
 
     @Override
-    @Transactional
     public Optional<Glasses> save(String imgUrl, Integer price, Integer quantity, String category, Long brand) throws BrandNotFoundException, CategoryNotFoundException {
         Brand b=this.brandRepository.findById(brand).orElseThrow(BrandNotFoundException::new);
         Category cat= Category.findByText(category);
@@ -50,7 +47,6 @@ public class GlassesServiceImpl implements GlassesService {
     }
 
     @Override
-    @Transactional
     public Optional<Glasses> edit(Long id, String imgUrl, Integer price, Integer quantity, String category, Long brand) throws BrandNotFoundException, GlassesNotFoundException {
         Glasses glasses=this.glassesRepository.findById(id).orElseThrow(GlassesNotFoundException::new);
         glasses.setImgUrl(imgUrl);
@@ -70,16 +66,6 @@ public class GlassesServiceImpl implements GlassesService {
         this.glassesRepository.deleteById(id);
     }
 
-    @Override
-    public void deleteFromShoppingCart(Long id, User user) throws GlassesNotFoundException {
-        Glasses glasses=this.findById(id).orElseThrow(GlassesNotFoundException::new);
-        List<ShoppingCart> shoppingCarts=this.shoppingCartRepository.findAll();
-        for(int i=0;i<shoppingCarts.size();i++){
-            if(shoppingCarts.get(i).getGlassesList().contains(glasses)){
-                shoppingCarts.get(i).getGlassesList().remove(glasses);
-            }
-        }
-    }
 
 
     @Override

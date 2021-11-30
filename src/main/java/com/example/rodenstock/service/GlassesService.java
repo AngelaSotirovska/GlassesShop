@@ -23,8 +23,6 @@ public interface GlassesService {
 
     void deleteById(Long id);
 
-    void deleteFromShoppingCart(Long id, User user) throws GlassesNotFoundException;
-
     Glasses get(Long id);
 
 }

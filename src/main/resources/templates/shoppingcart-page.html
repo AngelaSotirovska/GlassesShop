@@ -3,18 +3,22 @@
         <div class="forCol text-center" th:each="gl:${glasses}" style="width: 32%; margin-top: 10px; margin-bottom: 30px; margin-left: 6px; margin-right: 6px; float: left; display: inline-block">
             <div class="product-grid4">
                 <div class="product-image4">
-                    <a th:href="@{'/glasses/showglasses/{id}' (id=${gl.getId()})}">
-                        <img class="pic-1" src="/imgs" th:src="@{${gl.getImgUrl()}}" style="width: 190px; height: 110px">
+                    <a th:href="@{'/glasses/showglasses/{id}' (id=${gl.glasses.getId()})}">
+                        <img class="pic-1" src="/imgs" th:src="@{${gl.glasses.getImgUrl()}}" style="width: 190px; height: 110px">
                     </a>
                 </div>
                 <div class="product-content">
-                    <h3 class="title"><a th:href="@{'/glasses/showglasses/{id}' (id=${gl.getId()})}" th:text="${gl.getBrand().getName()}" style="text-decoration: none; color: black"></a></h3>
-                    <div style="margin-bottom: 3px"><span>$</span><span class="price" th:text="${gl.price}"></span></div>
+                    <h3 class="title"><a th:href="@{'/glasses/showglasses/{id}' (id=${gl.glasses.getId()})}" th:text="${gl.glasses.getBrand().getName()}" style="text-decoration: none; color: black"></a></h3>
+                    <div style="margin-bottom: 3px"><span>$</span><span class="price" th:text="${gl.glasses.price}"></span></div>
                     </div>
                     <a class="btn btn-sm btn-danger delete" th:href="@{'/shopping-cart/remove/{id}' (id=${gl.getId()})}"><b
                             class="fa fa-trash">Remove From Cart</b></a>
                 </div>
             </div>
         </div>
+    <div th:if="${glasses.size()==0}">
+        <div class="text-center">
+            <h2><b>Your shopping cart is empty.</b></h2>
+        </div>
     </div>
-</div>
+    </div>

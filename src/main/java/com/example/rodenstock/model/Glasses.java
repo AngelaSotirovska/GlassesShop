@@ -3,6 +3,7 @@ package com.example.rodenstock.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,6 +24,10 @@ public class Glasses {
 
     @ManyToOne
     private Brand brand;
+
+    @OneToMany(mappedBy = "glasses", cascade = CascadeType.ALL)
+    private List<CartItem> items;
+
 
     public Glasses() {
     }

@@ -5,10 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @Entity
@@ -28,14 +25,12 @@ public class User implements UserDetails {
     private Role role;
 
 
+
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
     private boolean isEnabled = true;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    @Column(name = "cart_id")
-    private List<ShoppingCart> cart;
 
     public User() {
     }
