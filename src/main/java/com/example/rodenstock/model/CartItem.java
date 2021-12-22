@@ -20,6 +20,7 @@ public class CartItem {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     public CartItem(){
     }
 

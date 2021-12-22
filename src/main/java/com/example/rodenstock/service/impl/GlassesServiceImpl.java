@@ -72,4 +72,11 @@ public class GlassesServiceImpl implements GlassesService {
     public Glasses get(Long id) {
         return this.glassesRepository.findById(id).get();
     }
+
+    @Override
+    public Optional<Glasses> editQuantity(Long id, Integer quantity) throws GlassesNotFoundException {
+        Glasses glasses=this.glassesRepository.findById(id).orElseThrow(GlassesNotFoundException::new);
+        glasses.setQuantity(quantity);
+        return Optional.of(this.glassesRepository.save(glasses));
+    }
 }

@@ -307,7 +307,12 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <form th:action="@{'/shopping-cart/addglasses-shoppingcart/{id}' (id=${glasses.getId()})}" th:method="POST" sec:authorize="isAuthenticated()">
-                                    <button type="submit" class="btn btn-primary shop-button">Add to Cart</button>
+                                    <button type="submit" class="btn btn-primary shop-button" style="margin-bottom: 3px">Add to Cart</button>
+                                </form>
+                                <form action="/orders/add" method="POST" sec:authorize="isAuthenticated()">
+                                    <input type="number" id="quantity" name="quantity" onkeydown="return false" min="1" th:max="${glasses.getQuantity()}" style="width: 35px">
+                                    <input id="id" type="hidden" name="id" th:value="(${glasses.getId()})">
+                                    <button class="btn btn-sm btn-info edit" type="submit">Order Glasses</button>
                                 </form>
                                 <a type="button" class="btn btn-primary" href="/glasses" style="margin-top: 5px">Back</a>
                             </div>

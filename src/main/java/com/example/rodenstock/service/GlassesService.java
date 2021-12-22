@@ -25,4 +25,6 @@ public interface GlassesService {
 
     Glasses get(Long id);
 
+    Optional<Glasses> editQuantity(Long id, Integer quantity) throws GlassesNotFoundException;
+
 }

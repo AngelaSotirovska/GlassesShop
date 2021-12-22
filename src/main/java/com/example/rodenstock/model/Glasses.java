@@ -28,7 +28,6 @@ public class Glasses {
     @OneToMany(mappedBy = "glasses", cascade = CascadeType.ALL)
     private List<CartItem> items;
 
-
     public Glasses() {
     }
 
